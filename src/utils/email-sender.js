@@ -1,27 +1,25 @@
-const { USER_EMAIL, USER_NAME, READINGS_EMAIL, ADDRESS } = require('./constants'); //TO-BE taken from DB
+const { USER_EMAIL, USER_NAME, ADDRESS } = require('./constants'); //TO-BE taken from DB
 const nodemailer = require('nodemailer');
 require('dotenv').config();
 
-const sendMail = (month, sentReading) => {
+const sendMail = (month, sentReading, email) => {
       const subjectField = 'Water meter reading - '+ month;
       const textField = 'Hello!\n\nThe water-meter reading for the month of '
       + month + ' is '+ sentReading +'\n'+ ADDRESS + '\n\n'+ USER_NAME;
 
       const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        host: 'smtp.office365.com',
+        port: 587,
+        secure: false,
         auth: {
-          type: 'OAuth2',
           user: process.env.MAIL_USERNAME,
           pass: process.env.MAIL_PASSWORD,
-          clientId: process.env.OAUTH_CLIENTID,
-          clientSecret: process.env.OAUTH_CLIENT_SECRET,
-          refreshToken: process.env.OAUTH_REFRESH_TOKEN
         }
       });
     
       const mailOptions = {
           from: USER_EMAIL,
-          to: READINGS_EMAIL,
+          to: email,
           subject: subjectField,
           text: textField
       };
