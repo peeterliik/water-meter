@@ -5,8 +5,11 @@ const getLatestReading = require("./get-latest");
 const getConsumptionMonth = require("./get-consumption-month");
 const getReadingMonth = require("./get-reading-month");
 const sendReading = require("./put-send-reading");
+const postReading = require("./post-reading");
+const postUser = require("./post-user");
+const getUser = require("./get-user");
+const putUser = require("./put-user");
 
-const Reading = require("../models/reading");
 const router = new express.Router();
 
 router.use(getReadingById);
@@ -15,17 +18,10 @@ router.use(getLatestReading);
 router.use(getConsumptionMonth);
 router.use(getReadingMonth);
 router.use(sendReading);
-
-//POST a reading
-router.post("/reading", async (req, res) => {
-	const reading = new Reading(req.body);
-	try {
-		await reading.save();
-		res.status(201).send(reading);
-	} catch (error) {
-		res.status(400).send(error);
-	}
-});
+router.use(postReading);
+router.use(postUser);
+router.use(getUser);
+router.use(putUser);
 
 /* 
 List of routers TO-BE-DONE
