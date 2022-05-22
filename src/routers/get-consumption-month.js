@@ -10,8 +10,8 @@ router.get("/consumption/month", async (req, res) => {
 	const today = new Date();
 	const currentMonth = today.getMonth();
 	const currentYear = today.getFullYear();
-	let month = req.query.month;
-	let year = req.query.year;
+	let month = Number(req.query.month);
+	let year = Number(req.query.year);
 
 	let queryDateStart;
 	let queryDateEnd;
@@ -19,14 +19,7 @@ router.get("/consumption/month", async (req, res) => {
 	if ((!month && !year) || (month === currentMonth && year === currentYear)) {
 		queryDateStart = dateFns.startOfMonth(new Date());
 		queryDateEnd = new Date();
-		console.log(queryDateStart, queryDateEnd);
 	} else {
-		if (!month) {
-			month = currentMonth;
-		}
-		if (!year) {
-			year = currentYear;
-		}
 		if (!dateValidation(month, year)) {
 			return res.status(404).send({ error: "Incorrect month or year" });
 		}
