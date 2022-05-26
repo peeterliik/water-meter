@@ -5,7 +5,7 @@ const router = new express.Router();
 
 router.patch("/user", async (req, res) => {
 	const updates = Object.keys(req.body);
-	const allowedUpdates = ["name", "address", "recipient"];
+	const allowedUpdates = ["name", "address", "recipient", "schedule"];
 	const isValidOperation = updates.every((update) =>
 		allowedUpdates.includes(update)
 	);

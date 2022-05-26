@@ -1,9 +1,5 @@
-const USER_EMAIL = 'liikpeeter@gmail.com';
-const USER_NAME = 'Peeter Liik';
-const ADDRESS = 'Observatooriumi 11-6, Tõravere';
+const USER_EMAIL = "peeterliik@ut.ee";
 
-module.exports =  {
-    USER_EMAIL,
-    USER_NAME,
-    ADDRESS
+module.exports = {
+	USER_EMAIL,
 };

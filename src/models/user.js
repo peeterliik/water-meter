@@ -10,6 +10,10 @@ const User = mongoose.model("User", {
 	recipient: {
 		type: String,
 	},
+	schedule: {
+		type: Number,
+		default: 0,
+	},
 });
 
 module.exports = User;
